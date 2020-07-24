@@ -1,0 +1,57 @@
+:root {
+  --blue: rgb(0, 200, 255);
+  --yellow: rgb(255, 255, 0);
+  --green: rgb(50, 200, 50);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/* Slides */
+.slide {
+  position: relative;
+  width: 100vw;
+  height: 85vh;
+}
+
+/* Center Title */
+.title {
+  position: absolute;
+  display: inline-block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+  color: var(--yellow);
+  font-family: 'Reem Kufi', sans-serif;
+}
+
+/* Blue background */
+.blue-back {
+  background: var(--blue);
+}
+
+/* Green background */
+.green-back {
+  background: var(--green);
+}
+
+/* Top Heading */
+.heading {
+  position: absolute;
+  display: inline-block;
+  left: 50%;
+  transform: translate(-50%);
+  margin: 0.5rem;
+  font-size: 4rem;
+  color: var(--yellow);
+  font-family: 'Reem Kufi', sans-serif;
+}
+
+/* Anything with the font of gunn peeps */
+.peeps-font {
+  font-family: 'Bungee', cursive;
+  color: white;
+}
