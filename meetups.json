@@ -1,0 +1,14 @@
+{
+  [
+    {
+      "title": "Virtual Meetup",
+      "time": "Saturday | July 25, 2020 | 2:00 PM",
+      "periods": [
+        {
+          "start": "2:00 PM",
+          "end": "3:00 PM"
+        }
+      ]
+    }
+  ]
+}

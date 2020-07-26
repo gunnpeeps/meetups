@@ -1,0 +1,7 @@
+/* List in resources slide */
+#resource-list {
+  list-style-type: none;
+}
+
+#resource-list > li {
+}

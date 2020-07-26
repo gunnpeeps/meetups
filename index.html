@@ -1,67 +1,120 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
-<head>
+  <head>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Reem+Kufi&family=Red+Rose&family=Bungee&amp;family=Varela+Round&display=swap"
+      rel="stylesheet" />
+    <!-- font-family: 'Bungee', cursive; -->
+    <!-- font-family: 'Varela Round', sans-serif; -->
+    <!-- font-family: 'Red Rose', cursive; -->
+    <!-- font-family: 'Reem Kufi', sans-serif; -->
 
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Reem+Kufi&family=Red+Rose&family=Bungee&amp;family=Varela+Round&display=swap"
-    rel="stylesheet">
-  <!-- font-family: 'Bungee', cursive; -->
-  <!-- font-family: 'Varela Round', sans-serif; -->
-  <!-- font-family: 'Red Rose', cursive; -->
-  <!-- font-family: 'Reem Kufi', sans-serif; -->
+    <!-- p5js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"
+      integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA=="
+      crossorigin="anonymous">
+      </script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+      crossorigin="anonymous">
+      </script>
+    <!-- Mustache -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.1/mustache.min.js"
+      integrity="sha512-6AXIWogbKpsHvoZJrJtHpIYES4wP8czSj0zk7ZfwOYS8GWYFNSykwdfapt7yQc4ikZytemBu+QyVObzBHJMwYg=="
+      crossorigin="anonymous">
+      </script>
 
-  <!-- jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
-  <!-- p5js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" charset="utf-8"></script>
+    <!-- Firebase -->
 
-  <!-- Firebase -->
+    <!-- Javascript Files -->
+    <script src="convert.js"></script>
 
-  <!-- Javascript Files -->
-  <script src="./test.js" charset="utf-8"></script>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="./CSS/master.css" />
+    <link rel="stylesheet" href="./CSS/meetups.css" />
+    <link rel="stylesheet" href="./CSS/resources.css" />
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="./CSS/master.css">
+    <meta charset="utf-8" />
+    <title>PEEPS Meetups</title>
+    <link rel="shortcut icon" type="image/ico" href="./Images/favicon.svg" />
+  </head>
 
-  <meta charset="utf-8">
-  <title>PEEPS Meetups</title>
-  <link rel="shortcut icon" type="image/ico" href="./Images/favicon.png" />
+  <body>
+    <div class="slide blue-back" id="title-slide">
+      <div class="title"><span class="peeps-font">PEEPS</span> Meetups</div>
+    </div>
 
-</head>
+    <div class="slide green-back" id="meetups-slide" style="min-height: 60vh;">
+      <div class="heading">Meetups</div>
 
-<body>
+      <div id="card-container">
 
-  <div class="slide blue-back" id="title-slide">
-    <div class="title"><span class="peeps-font">PEEPS</span> Meetups</div>
-  </div>
+        <div class="meetup-card">
+          <div class="title-time-container">
+            <div class="card-title">Virtual Meetup</div>
+            <div class="card-date-time">Saturday | July 25, 2020 | 2:00 PM</div>
+          </div>
 
-  <div class="slide green-back" id="meetups-slide" style="min-height: 60vh">
-    <div class="heading">Meetups</div>
-    <div id="card-container">
+          <div class="card-info-container">
 
-      <div class="meetup-card">
-        <div class="title-time-container">
-          <div class="card-title">Virtual Meetup</div>
-          <div class="card-date-time">Saturday | July 25, 2020 | 2:00 PM</div>
+            <div class="card-schedule">
+              <div class="card-subheading">Schedule</div>
+              <div class="schedule-period">2:00PM - 3:00PM</div>
+            </div>
+
+            <div class="card-people-container">
+              <div class="card-subheading">People</div>
+            </div>
+
+          </div>
         </div>
+
       </div>
 
     </div>
-  </div>
 
-  <div class="slide blue-back" style="min-height: 65vh;">
-    <div class="heading">Resources</div>
-    <ul id="resource-list">
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
-  </div>
+    <div class="slide blue-back" style="min-height: 65vh;">
+      <div class="heading">Resources</div>
+      <ul id="resource-list">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </body>
 
-</body>
+  <!-- Templates -->
+  <template id="meetup-card-template">
+
+    {{#meetups}}
+    <div class="meetup-card">
+      <div class="title-time-container">
+        <div class="card-title">{{title}}</div>
+        <div class="card-date-time">{{time}}</div>
+      </div>
+
+      <div class="card-info-container">
+
+        <div class="card-schedule">
+          <div class="card-subheading">Schedule</div>
+          {{#periods}}
+          <div class="schedule-period">{{start}} - {{end}}</div>
+          {{/periods}}
+        </div>
+
+        <div class="card-people-container">
+          <div class="card-subheading">People</div>
+        </div>
+
+      </div>
+    </div>
+    {{/meetups}}
+
+  </template>
 
 </html>
