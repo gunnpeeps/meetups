@@ -49,31 +49,7 @@
 
     <div class="slide green-back" id="meetups-slide" style="min-height: 60vh;">
       <div class="heading">Meetups</div>
-
-      <div id="card-container">
-
-        <div class="meetup-card">
-          <div class="title-time-container">
-            <div class="card-title">Virtual Meetup</div>
-            <div class="card-date-time">Saturday | July 25, 2020 | 2:00 PM</div>
-          </div>
-
-          <div class="card-info-container">
-
-            <div class="card-schedule">
-              <div class="card-subheading">Schedule</div>
-              <div class="schedule-period">2:00PM - 3:00PM</div>
-            </div>
-
-            <div class="card-people-container">
-              <div class="card-subheading">People</div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
+      <div id="card-container"></div>
     </div>
 
     <div class="slide blue-back" style="min-height: 65vh;">
@@ -103,7 +79,7 @@
         <div class="card-schedule">
           <div class="card-subheading">Schedule</div>
           {{#periods}}
-          <div class="schedule-period">{{start}} - {{end}}</div>
+          <div class="schedule-period">{{start}} - {{end}} | {{activity}}</div>
           {{/periods}}
         </div>
 

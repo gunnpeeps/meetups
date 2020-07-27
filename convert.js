@@ -7,4 +7,5 @@ $(function () {
   $.getJSON("./meetups.json", function (meetups) {
     cards.append(Mustache.render($("#meetup-card-template").html(), { "meetups": meetups }));
   });
+
 });

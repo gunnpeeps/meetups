@@ -1,14 +1,18 @@
-{
-  [
-    {
-      "title": "Virtual Meetup",
-      "time": "Saturday | July 25, 2020 | 2:00 PM",
-      "periods": [
-        {
-          "start": "2:00 PM",
-          "end": "3:00 PM"
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "title": "Virtual Meetup",
+    "time": "Saturday | July 25, 2020 | 2:00 PM",
+    "periods": [
+      {
+        "start": "2:00 PM",
+        "end": "3:00 PM",
+        "activity": "do dank"
+      },
+      {
+        "start": "3:00 PM",
+        "end": "4:00 PM",
+        "activity": "bully raguar"
+      }
+    ]
+  }
+]
