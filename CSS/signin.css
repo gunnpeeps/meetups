@@ -1,0 +1,22 @@
+#nav-bar {
+  position: fixed;
+  background: var(--blue);
+  z-index: 1;
+  width: 100%;
+  padding: 1rem;
+}
+
+#log-in {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-family: sans-serif;
+  background: var(--green);
+  color: white;
+  padding: 0.5rem;
+  font-weight: bold;
+  float: right;
+  overflow: hidden;
+  box-shadow: 1px 1px 0 var(--darkgreen), 2px 2px 0 var(--darkgreen),
+    3px 3px 0 var(--darkgreen), 4px 4px 0 var(--darkgreen),
+    5px 5px 0 var(--darkgreen);
+}

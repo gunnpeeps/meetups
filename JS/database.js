@@ -13,9 +13,17 @@ class Database {
     this.ref = firebase.firestore().collection('Meetup Cards');
   }
 
-  async getAllMeetups() {
+  getAllMeetups() {
     return this.ref.get().then(coll => {
       return coll.docs.map(doc => doc.data());
+    });
+  }
+
+  createMeetup(title, time) {
+    this.ref.doc(title).set({
+      "title": title,
+      "time": time,
+      "periods": []
     });
   }
 
