@@ -68,20 +68,58 @@
 }
 
 /* Meetup card schedule */
-.card-schedule {
-  padding-bottom: 1rem;
+.card-schedule-container {
+  padding-bottom: 1.5rem;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Meetup card schedule periods */
-.schedule-period {
-  font-family: monospace;
-  font-size: 1.5rem;
 }
 
 /* Container for people attending and subheading */
 .card-people-container {
-  padding-top: 1rem;
+  padding-top: 1.5rem;
+}
+
+/* Meetup card schedule periods */
+.schedule-periods {
+  display: flex;
+}
+
+/* Meetup cards' times and activities divs in schedule */
+.period-times,
+.period-activities {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+
+  padding: 0 0.75rem;
+}
+
+/* Meetup cards' times div in schedule */
+.period-times {
+  align-items: flex-end;
+
+  border-right: 2px solid white;
+  font-family: monospace;
+  font-size: 15pt;
+  font-size-adjust: 1;
+}
+
+/* Meetup cards' activities div in schedule */
+.period-activities {
+  align-items: flex-start;
+
+  font-family: sans-serif;
+  font-size: 15pt;
+  font-size-adjust: 1;
+}
+
+/* Meetup cards' schedule activity */
+.period-time {
+  padding: 2pt 0;
+}
+
+/* Meetup cards' schedule time */
+.period-activity {
+  padding: 2pt 0;
 }
 
 /* People attending meetup */

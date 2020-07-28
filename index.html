@@ -11,11 +11,6 @@
     <!-- font-family: 'Red Rose', cursive; -->
     <!-- font-family: 'Reem Kufi', sans-serif; -->
 
-    <!-- p5js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"
-      integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA=="
-      crossorigin="anonymous">
-      </script>
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
       integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
@@ -26,11 +21,15 @@
       integrity="sha512-6AXIWogbKpsHvoZJrJtHpIYES4wP8czSj0zk7ZfwOYS8GWYFNSykwdfapt7yQc4ikZytemBu+QyVObzBHJMwYg=="
       crossorigin="anonymous">
       </script>
-
     <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
+
 
     <!-- Javascript Files -->
-    <script src="convert.js"></script>
+    <script src="./JS/convert.js"></script>
+    <script src="./JS/database.js"></script>
+    <script src="./JS/main.js"></script>
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="./CSS/master.css" />
@@ -63,34 +62,5 @@
       </ul>
     </div>
   </body>
-
-  <!-- Templates -->
-  <template id="meetup-card-template">
-
-    {{#meetups}}
-    <div class="meetup-card">
-      <div class="title-time-container">
-        <div class="card-title">{{title}}</div>
-        <div class="card-date-time">{{time}}</div>
-      </div>
-
-      <div class="card-info-container">
-
-        <div class="card-schedule">
-          <div class="card-subheading">Schedule</div>
-          {{#periods}}
-          <div class="schedule-period">{{start}} - {{end}} | {{activity}}</div>
-          {{/periods}}
-        </div>
-
-        <div class="card-people-container">
-          <div class="card-subheading">People</div>
-        </div>
-
-      </div>
-    </div>
-    {{/meetups}}
-
-  </template>
 
 </html>

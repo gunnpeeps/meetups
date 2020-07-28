@@ -1,0 +1,35 @@
+<!-- Template for Meetup Cards -->
+<div class="meetup-card">
+  <div class="title-time-container">
+    <div class="card-title">{{title}}</div>
+    <div class="card-date-time">{{time}}</div>
+  </div>
+
+  <div class="card-info-container">
+
+    <div class="card-schedule-container">
+      <div class="card-subheading">Schedule</div>
+      <div class="schedule-periods">
+
+        <div class="period-times">
+          {{#periods}}
+          <div class="period-time">{{start}} - {{end}}</div>
+          {{/periods}}
+        </div>
+        <div class="period-activities">
+          {{#periods}}
+          <div class="period-activity">{{activity}}</div>
+          {{/periods}}
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-people-container">
+      <div class="card-subheading">People</div>
+    </div>
+
+    <div class="card-details"></div>
+
+  </div>
+</div>

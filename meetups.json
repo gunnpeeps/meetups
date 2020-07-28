@@ -4,14 +4,13 @@
     "time": "Saturday | July 25, 2020 | 2:00 PM",
     "periods": [
       {
-        "start": "2:00 PM",
-        "end": "3:00 PM",
-        "activity": "do dank"
+        "start": "2:00PM",
+        "end": "3:00PM",
+        "activity": "activity 1"
       },
       {
-        "start": "3:00 PM",
-        "end": "4:00 PM",
-        "activity": "bully raguar"
+        "end": "4:00PM",
+        "activity": "activity 2"
       }
     ]
   }
