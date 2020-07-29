@@ -21,21 +21,26 @@
       integrity="sha512-6AXIWogbKpsHvoZJrJtHpIYES4wP8czSj0zk7ZfwOYS8GWYFNSykwdfapt7yQc4ikZytemBu+QyVObzBHJMwYg=="
       crossorigin="anonymous">
       </script>
+    <!-- Sass CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sass.js/0.11.1/sass.min.js"
+      integrity="sha512-/F8YhC3n5OrM9ta9htMD620kH0paKnjDHCHcSvyWumxlqsnkS/XCpYExuMZuXE4K3GE9tDQFBqgXsmkjsjRbDQ=="
+      crossorigin="anonymous">
+      </script>
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
 
     <!-- Javascript Files -->
-    <script src="./JS/looks.js"></script>
-    <script src="./JS/convert.js"></script>
+    <script src="./JS/signin.js"></script>
     <script src="./JS/database.js"></script>
     <script src="./JS/main.js"></script>
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="./CSS/master.css" />
-    <link rel="stylesheet" href="./CSS/signin.css" />
+    <link rel="stylesheet" href="./CSS/navbar.css" />
     <link rel="stylesheet" href="./CSS/meetups.css" />
     <link rel="stylesheet" href="./CSS/resources.css" />
+    <link rel="stylesheet" href="./CSS/signin.css" />
 
     <meta charset="utf-8" />
     <title>PEEPS Meetups</title>
@@ -45,6 +50,9 @@
   <body>
 
     <div id="nav-bar">
+      <div class="slide-ref"><a href="#meetups-slide">Meetups</a></div>
+      <div class="slide-ref"><a href="#resource-slide" style="color: var(--yellow);">Resources</a></div>
+      <div id="sign-up">Sign Up</div>
       <div id="log-in">Log In</div>
     </div>
 
@@ -57,7 +65,7 @@
       <div id="card-container"></div>
     </div>
 
-    <div class="slide blue-back" style="min-height: 65vh;">
+    <div class="slide blue-back" id="resource-slide" style="min-height: 65vh;">
       <div class="heading">Resources</div>
       <ul id="resource-list">
         <li></li>
@@ -67,6 +75,11 @@
         <li></li>
       </ul>
     </div>
+
+    <div id="popup-container" style="display: none;">
+      <div id="popup"></div>
+    </div>
+
   </body>
 
 </html>

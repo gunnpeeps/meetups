@@ -1,22 +1,25 @@
-#nav-bar {
-  position: fixed;
-  background: var(--blue);
-  z-index: 1;
-  width: 100%;
-  padding: 1rem;
+#email-password-container {
+  display: flex;
+  flex-direction: column;
 }
 
-#log-in {
-  display: inline-block;
+#email,
+#password {
   font-size: 1.5rem;
+  margin: 5px 0;
+}
+
+#submit-account {
+  align-self: flex-start;
   font-family: sans-serif;
+  font-size: 1rem;
   background: var(--green);
   color: white;
   padding: 0.5rem;
-  font-weight: bold;
-  float: right;
-  overflow: hidden;
-  box-shadow: 1px 1px 0 var(--darkgreen), 2px 2px 0 var(--darkgreen),
-    3px 3px 0 var(--darkgreen), 4px 4px 0 var(--darkgreen),
-    5px 5px 0 var(--darkgreen);
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+#submit-account:hover {
+  cursor: pointer;
 }

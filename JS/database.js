@@ -27,4 +27,12 @@ class Database {
     });
   }
 
+  logIn(email, pass) {
+    console.log(email, pass);
+  }
+
+  signUp(email, pass) {
+    console.log(email, pass);
+  }
+
 }

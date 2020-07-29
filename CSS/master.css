@@ -1,8 +1,9 @@
 :root {
   --blue: rgb(0, 200, 255);
+  --darkblue: rgb(0, 100, 255);
   --green: rgb(50, 200, 50);
-  --darkgreen: rgb(50, 125, 50);
   --yellow: rgb(255, 255, 0);
+  --orange: rgb(255, 150, 0);
   --red: rgb(255, 100, 75);
 }
 
@@ -10,6 +11,10 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 /* Slides */
@@ -70,4 +75,26 @@
 .peeps-font {
   font-family: "Bungee", cursive;
   color: white;
+}
+
+/* popup container */
+#popup-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+}
+#popup {
+  align-self: center;
+  width: 50%;
+  height: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
