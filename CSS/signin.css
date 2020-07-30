@@ -1,12 +1,26 @@
+#popup-title {
+  position: absolute;
+  top: 0;
+  padding: 0.5rem;
+  font-size: 3rem;
+  font-family: "Varela Round", sans-serif;
+  color: var(--green);
+  background: rgba(0, 0, 0, 0.1);
+}
+
 #email-password-container {
   display: flex;
   flex-direction: column;
+  width: 75%;
 }
 
 #email,
 #password {
   font-size: 1.5rem;
-  margin: 5px 0;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+  margin: 0.5rem 0;
 }
 
 #submit-account {
@@ -16,10 +30,12 @@
   background: var(--green);
   color: white;
   padding: 0.5rem;
-  margin: 5px 0;
-  font-size: 1rem;
+  margin: 0.5rem 0;
+  font-size: 1.25rem;
+  cursor: pointer;
 }
 
-#submit-account:hover {
-  cursor: pointer;
+.unclickable {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

@@ -87,14 +87,54 @@ html {
   background: rgba(255, 255, 255, 0.5);
   display: flex;
   justify-content: center;
+  z-index: 1;
 }
 #popup {
   align-self: center;
+  position: relative;
   width: 50%;
   height: 50%;
   background: white;
+  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.3);
+}
+#popup-target {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+/* close button on popup */
+#close-popup {
+  display: block;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+}
+
+#pos-close-button,
+#neg-close-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 3px;
+  background: black;
+  transition: transform 0.2s;
+}
+#pos-close-button {
+  transform: rotate(45deg);
+}
+#neg-close-button {
+  transform: rotate(-45deg);
+}
+
+#close-popup:hover > #neg-close-button,
+#close-popup:hover > #pos-close-button {
+  transform: rotate(0);
 }

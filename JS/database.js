@@ -11,6 +11,7 @@ class Database {
       appId: "1:141473042666:web:ce07e25d84cec89cad8793"
     });
     this.ref = firebase.firestore().collection('Meetup Cards');
+    this.auth = firebase.auth();
   }
 
   getAllMeetups() {
@@ -29,10 +30,12 @@ class Database {
 
   logIn(email, pass) {
     console.log(email, pass);
+    this.auth.signInWithEmailAndPassword(email, pass);
   }
 
   signUp(email, pass) {
     console.log(email, pass);
+    this.auth.createUserWithEmailAndPassword(email, pass);
   }
 
 }
