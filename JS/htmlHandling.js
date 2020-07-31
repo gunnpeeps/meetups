@@ -1,94 +1,92 @@
-class Html {
+$(async () => {
+  const logInSignUp = $(".log-in-sign-up");
+  const popupContainer = $("#popup-container");
+  const popup = popupContainer.find("#popup-target");
+  const cards = $("#card-container");
+  const cardTemplate = await (await fetch("../Templates/meetup-card.html")).text();
+  const meetups = await database.getAllMeetups();
 
-  constructor() {
-    $(() => {
-      this.login = $("#log-in");
-      this.signup = $("#sign-up");
-      this.popupContainer = $("#popup-container");
-      this.popup = this.popupContainer.find("#popup-target");
-
-      this.eventHandlers();
-      this.createMeetups();
-    });
+  for (let meetup of meetups) {
+    cards.append(Mustache.render(cardTemplate, meetup));
   }
 
-  async createMeetups() {
-    // Variables
-    var cards = $("#card-container");
-    var template = await (await fetch("../Templates/meetup-card.html")).text();
-    var meetups = await database.getAllMeetups();
+  // Event handler for login button
+  logInSignUp.click(async function () {
 
-    // Create on website
-    for (let meetup of meetups) {
-      for (let i = 1; i < meetup.periods.length; i++) {
-        meetup.periods[i].start = meetup.periods[i - 1].end;
+    // Show popup
+    const template = await (await fetch("../Templates/signin.html")).text();
+    showPopup(template, { "button": this.innerText });
+
+    // DOM elements
+    const email = $("#email");
+    const pass = $("#password");
+    const emailpass = $("#email, #password");
+    const submit = $("#submit-account");
+    const error = $("#error");
+
+    // Checks every time email input changes
+    emailpass.on('input', () => {
+      if (verifyInfo(email.val(), pass.val())) {
+        submit.attr("class", "clickable");
+      } else {
+        submit.attr("class", "unclickable");
       }
-      cards.append(Mustache.render(template, meetup));
-    }
-  }
+    });
+    emailpass.trigger('input');
 
-  eventHandlers() {
-    this.loginClick();
-    this.signupClick();
-  }
-
-  loginClick() {
-    this.login.click(async () => {
-
-      var template = await (await fetch("../Templates/signin.html")).text();
-      var submit = $("#submit-account");
-      var email = $("#email");
-      var pass = $("#password");
-
-      // Shows popup with login input
-      this.showPopup(template, { "button": "Log In" });
-
-      // Verify login info
-      email.change(() => {
-        console.log("hi");
-        if (this.verifyEmail(email.val())) {
-          submit.removeClass("unclickable");
-        } else {
-          submit.addClass("unclickable");
+    // Submit button event listener
+    error.hide();
+    if (this.id == "log-in") {
+      submit.click(() => {
+        if (submit.attr("class") == "clickable") {
+          database.logIn(email.val(), pass.val())
+            .catch(e => {
+              error.show().text(e);
+            })
+            .then(user => {
+              if (user) {
+                error.hide();
+              } else {
+                error.show().text("Invalid username and/or password.");
+              }
+            });
         }
       });
-
-      // Submit login info
+    } else {
       submit.click(() => {
-        database.logIn(email.val(), pass.val());
+        if (submit.attr("class") == "clickable") {
+          database.signUp(email.val(), pass.val())
+            .catch(e => {
+              error.show().text(e);
+            })
+            .then(user => {
+              if (user) {
+                error.hide();
+              } else {
+                error.show().text("Invalid username and/or password.");
+              }
+            });
+        }
       });
-    });
-  }
+    }
 
-  signupClick() {
-    this.signup.click(async () => {
-      var template = await (await fetch("../Templates/signin.html")).text();
+  });
 
-      // Shows popup with login input
-      this.showPopup(template, { "button": "Sign Up" });
-
-      // Verifies and submits login info
-      $("#submit-account").click(function () {
-        var email = $("#email").val();
-        var pass = $("#password").val();
-
-        database.signUp(email, pass);
-      });
-    });
-  }
-
-  verifyEmail(email) {
+  function verifyInfo(email, pass) {
+    if (
+      email.includes("@") &&
+      email.slice(-4) == ".com" &&
+      pass
+    ) {
+      return true;
+    }
     return false;
   }
 
-  verifyPass(pass) {
-    return false;
+  function showPopup(template, obj) {
+    popup.html(Mustache.render(template, obj));
+    popupContainer.fadeIn();
+    $("#close-popup").click(() => popupContainer.fadeOut());
   }
 
-  showPopup(template, obj) {
-    this.popup.html(Mustache.render(template, obj));
-    this.popupContainer.fadeIn();
-    $("#close-popup").click(() => this.popupContainer.fadeOut());
-  }
-
-}
+});

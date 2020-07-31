@@ -32,10 +32,19 @@
   padding: 0.5rem;
   margin: 0.5rem 0;
   font-size: 1.25rem;
-  cursor: pointer;
 }
 
 .unclickable {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+#error {
+  padding: 0.5rem;
+  color: rgb(255, 0, 50);
+  background: rgb(255, 225, 225);
 }
