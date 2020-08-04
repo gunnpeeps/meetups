@@ -1,9 +1,18 @@
+.expand-popup {
+  width: 50vw;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #popup-title {
   position: absolute;
   top: 0;
   padding: 0.5rem;
   font-size: 3rem;
   font-family: "Varela Round", sans-serif;
+  font-weight: bolder;
   color: var(--green);
   background: rgba(0, 0, 0, 0.1);
 }
@@ -15,7 +24,8 @@
 }
 
 #email,
-#password {
+#password,
+#username {
   font-size: 1.5rem;
   border: none;
   outline: none;
@@ -26,20 +36,11 @@
 #submit-account {
   align-self: flex-start;
   font-family: sans-serif;
-  font-size: 1rem;
   background: var(--green);
   color: white;
   padding: 0.5rem;
   margin: 0.5rem 0;
   font-size: 1.25rem;
-}
-
-.unclickable {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.clickable {
   cursor: pointer;
 }
 
@@ -47,4 +48,51 @@
   padding: 0.5rem;
   color: rgb(255, 0, 50);
   background: rgb(255, 225, 225);
+}
+
+#verification {
+  font-family: sans-serif;
+  font-size: 2rem;
+  text-align: center;
+}
+
+#verification + div {
+  font-family: monospace;
+  padding: 1rem 0 0;
+  font-size: 2rem;
+  color: gray;
+}
+
+.or {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.or::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+.or::after {
+  content: "OR";
+  position: relative;
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  background: white;
+  color: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem;
+}
+
+#google-sign-up {
+  align-self: flex-start;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  font-size: 1.25rem;
+  color: white;
+  background: var(--blue);
+  cursor: pointer;
 }

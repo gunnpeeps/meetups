@@ -1,3 +1,11 @@
+.editable {
+  outline: none;
+  background: none;
+  border: none;
+  color: white;
+  text-align: center;
+}
+
 /* Meetup card container */
 #card-container {
   display: flex;
@@ -23,6 +31,7 @@
 .title-time-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   text-align: center;
 
@@ -39,12 +48,21 @@
 
   font-size: 3rem;
   font-family: "Varela Round", sans-serif;
+  color: white;
+  text-align: center;
 }
 
 /* Card date and time */
 .card-date-time {
   font-size: 1.5rem;
   font-family: monospace;
+  width: 30%;
+  cursor: pointer;
+}
+.card-date-time::-webkit-calendar-picker-indicator {
+  filter: invert(100%);
+  margin-left: -5px;
+  cursor: pointer;
 }
 
 /* Meetup cards info on right side */
@@ -69,6 +87,9 @@
 
 /* Meetup card schedule */
 .card-schedule-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding-bottom: 1.5rem;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
@@ -78,50 +99,45 @@
   padding-top: 1.5rem;
 }
 
-/* Meetup card schedule periods */
+/* Meetup card period table */
 .schedule-periods {
-  display: flex;
 }
 
-/* Meetup cards' times and activities divs in schedule */
-.period-times,
-.period-activities {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-
-  padding: 0 0.75rem;
+/* Meetup card period row */
+.schedule-period {
 }
 
-/* Meetup cards' times div in schedule */
-.period-times {
-  align-items: flex-end;
-
-  border-right: 2px solid white;
+.period-start,
+.period-end,
+.dash {
+  color: white;
+  font-size: 15pt;
+}
+.dash {
   font-family: monospace;
-  font-size: 15pt;
-  font-size-adjust: 1;
+  padding: 0 5px;
+}
+.period-start,
+.period-end {
+  cursor: pointer;
+}
+.period-start::-webkit-calendar-picker-indicator,
+.period-end::-webkit-calendar-picker-indicator {
+  filter: invert(100%);
+  margin: 0 -2px -1px 5px;
+  cursor: pointer;
 }
 
-/* Meetup cards' activities div in schedule */
-.period-activities {
-  align-items: flex-start;
-
-  font-family: sans-serif;
-  font-size: 15pt;
-  font-size-adjust: 1;
-}
-
-/* Meetup cards' schedule activity */
-.period-time {
-  padding: 2pt 0;
-}
-
-/* Meetup cards' schedule time */
 .period-activity {
-  padding: 2pt 0;
+  font-size: 15pt;
+  text-align: left;
+  padding-left: 1rem;
 }
 
 /* People attending meetup */
 .card-people {
+}
+
+.hide-icon::-webkit-calendar-picker-indicator {
+  display: none;
 }
