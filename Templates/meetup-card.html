@@ -1,8 +1,8 @@
 <!-- Template for Meetup Cards -->
 <div id={{id}} class="meetup-card">
   <div class="title-time-container">
-    <input type="text" class="card-title editable" value={{title}}></input>
-    <input type="date" class="card-date-time editable" value={{time}}></input>
+    <input type="text" class="card-title" value={{title}}></input>
+    <input type="date" class="card-date-time" value={{time}}></input>
   </div>
 
   <div class="card-info-container">
@@ -13,10 +13,10 @@
 
         {{#periods}}
         <tr class="schedule-period">
-          <td><input class="period-start editable" type="time" value={{start}}></td>
+          <td><input class="period-start" type="time" value={{start}}></td>
           <td class="dash">-</td>
-          <td><input class="period-end editable" type="time" value={{end}}></td>
-          <td><input class="period-activity editable" type="text" value={{activity}}></td>
+          <td><input class="period-end" type="time" value={{end}}></td>
+          <td><input class="period-activity" type="text" value={{activity}}></td>
         </tr>
         {{/periods}}
 

@@ -1,4 +1,4 @@
-var signIn = function () {
+function signIn() {
 
   const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -15,13 +15,22 @@ var signIn = function () {
     const emailpass = $("#email, #password");
     const submit = $("#submit-account");
     const error = $("#error");
+    const googleLogIn = $(".google-log-in");
 
     // Submit button event listener
     submit.click(() => {
       firebase.auth().signInWithEmailAndPassword(email.val(), pass.val())
-        .then(() => $("#close-popup").trigger('click'))
+        .then(() => closePopup.trigger('click'))
         .catch(e => {
-          error.show().text(e.message);
+          error.text(e.message).show();
+        });
+    });
+
+    googleLogIn.click(() => {
+      firebase.auth().signInWithPopup(provider)
+        .then(() => closePopup.trigger('click'))
+        .catch(function (error) {
+          console.log(error.message);
         });
     });
 
@@ -39,23 +48,31 @@ var signIn = function () {
     const emailpass = $("#email, #password");
     const submit = $("#submit-account");
     const error = $("#error");
+    const googleLogIn = $(".google-log-in");
 
     // Submit button event listener
     submit.click(async () => {
       await firebase.auth().createUserWithEmailAndPassword(email.val(), pass.val())
+        .then(() => {
+          var emailval = email.val();
+          showPopup(
+            `<div id='verification'>A verification email has been sent to</div><div>{{email}}</div>`,
+            { "email": emailval }
+          );
+          firebase.auth().currentUser.sendEmailVerification();
+        })
         .catch(e => {
-          error.text(e.message);
-          error.show();
+          error.text(e.message).show();
         });
-      var emailval = email.val();
-      showPopup(
-        `<div id='verification'>A verification email has been sent to</div><div>{{email}}</div>`,
-        { "email": emailval }
-      );
-      firebase.auth().currentUser.sendEmailVerification();
     });
 
-
+    googleLogIn.click(() => {
+      firebase.auth().signInWithPopup(provider)
+        .then(() => $("#close-popup").trigger('click'))
+        .catch(function (error) {
+          console.log(error.message);
+        });
+    });
 
   });
 
@@ -67,21 +84,21 @@ var signIn = function () {
       signUp.hide();
       logOut.show();
 
-      $(".log-in-show-hide").hide();
-      $("input[type='date'],input[type='time']").removeClass("hide-icon");
-      $(".editable").removeAttr("readonly");
-      $(".editable").on('keydown', e => { if (e.which === 13) e.preventDefault(); });
+      showHide.hide();
+      dateTimeInput.removeClass("hide-icon");
+      input.removeAttr("readonly")
+      textInput.on('keydown', e => { if (e.which === 13) e.preventDefault(); });
 
-      $(".")
+
     } else {
       logIn.show();
       signUp.show();
       logOut.hide();
 
-      $(".log-in-show-hide").show();
-      $("input[type='date'],input[type='time']").addClass("hide-icon");
-      $(".editable").attr("readonly", "true");
+      showHide.show();
+      dateTimeInput.addClass("hide-icon");
+      input.attr("readonly", "true");
     }
   });
 
-};
+}

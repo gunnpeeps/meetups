@@ -35,12 +35,12 @@
 
 #submit-account {
   align-self: flex-start;
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
   background: var(--green);
   color: white;
   padding: 0.5rem;
   margin: 0.5rem 0;
-  font-size: 1.25rem;
+  font-size: 15pt;
   cursor: pointer;
 }
 
@@ -87,12 +87,25 @@
   padding: 0.5rem;
 }
 
-#google-sign-up {
+.google-log-in {
   align-self: flex-start;
-  padding: 0.5rem;
-  font-family: sans-serif;
-  font-size: 1.25rem;
+  margin-top: 0.5rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 15pt;
   color: white;
-  background: var(--blue);
+  background: dodgerblue;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.google-log-in > span {
+  padding: calc(25px - 15pt / 2);
+}
+.google-log-in::before {
+  background: url(../Images/googleIcon.webp) center/40px 40px no-repeat, white;
+  width: 50px;
+  height: 50px;
+  margin: 3px;
+  display: inline-block;
+  content: "";
 }

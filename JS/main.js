@@ -1,25 +1,32 @@
 var database = new Database();
 
-var popupContainer, popup, cards, cardTemplate, meetups, logIn, signUp, logOut;
+var logIn, signUp, logOut;
+var popupContainer, popup, closePopup;
+var cards, cardTemplate, meetups;
+var showHide, input, dateTimeInput, textInput;
+
 var showPopup;
 
 $(async () => {
 
+  logIn = $("#log-in"), signUp = $("#sign-up");
+  logOut = $("#log-out");
   popupContainer = $("#popup-container");
-  popup = popupContainer.find("#popup-target");
+  popup = popupContainer.find("#popup");
+  popupTarget = popup.find("#popup-target");
+  closePopup = popup.find("#close-popup");
   cards = $("#card-container");
   cardTemplate = await (await fetch("../Templates/meetup-card.html")).text();
   meetups = await database.getAllMeetups();
-  logIn = $("#log-in");
-  signUp = $("#sign-up");
-  signInButton = $("#log-in, #sign-up")
-  logOut = $("#log-out");
+  showHide = $(".log-in-show-hide");
+  input = $("#meetups-slide>input");
+  dateTimeInput = input.find("input[type='date'],input[type='time']");
+  textInput = input.find("input[type='text']");
 
-  showPopup = async function (template, obj) {
-    await popupContainer.fadeOut();
-    popup.html(Mustache.render(template, obj));
+  showPopup = function (template, obj) {
+    popupContainer.fadeOut(() => popupTarget.html(Mustache.render(template, obj)));
     popupContainer.fadeIn();
-    $("#close-popup").click(() => popupContainer.fadeOut());
+    closePopup.click(() => popupContainer.fadeOut());
   };
 
   for (let meetup of meetups) {
