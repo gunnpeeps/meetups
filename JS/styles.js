@@ -2,11 +2,11 @@ $(() => {
 
   var shadow = '';
   for (let i = 1; i <= 5; i++) {
-    shadow += `${shadow ? ',' : ''} ${i}px ${i}px 0 black`;
+    shadow += `${shadow ? ',' : ''} ${i}px ${i}px 0 darkgreen`;
   }
   $("#js-styles").append(`
     #log-in, #sign-up, #log-out {
-      box-shadow: ${shadow};
+      box-shadow:${shadow};
     }
   `);
 
@@ -16,7 +16,7 @@ $(() => {
   }
   $("#js-styles").append(`
     #title-slide {
-      text-shadow: ${shadow};
+      text-shadow:${shadow};
     }
   `);
 

@@ -12,28 +12,37 @@ class Database {
     });
     this.database = firebase.firestore();
     this.users = this.database.collection('Users');
-    this.ref = this.database.collection('Meetups');
+    this.permissions = this.database.collection('Permissions').doc('Meetups');
+    this.meetups = this.database.collection('Meetups');
   }
 
   getAllMeetups() {
-    return this.ref.get().then(coll => {
-      return coll.docs.map(doc => {
-        var newDoc = doc.data();
-        newDoc.id = doc.id;
-        return newDoc;
-      });
-    });
+    return this.meetups.get()
+      .then(meetups => meetups.docs)
+      .catch(e => console.log(e.message));
   }
 
   createMeetup(title, time) {
-    this.ref.add({
+    this.meetups.add({
       "title": title,
       "time": time,
       "periods": []
     });
   }
   deleteMeetup(id) {
-    this.ref.doc(id).delete();
+    this.meetups.doc(id).delete();
+  }
+
+  updateMeetup(id,) {
+    this.meetups.doc(id).update({
+
+    });
+  }
+
+  getEditors() {
+    return this.permissions.get()
+      .then(p => p.data().editors)
+      .catch(e => console.error(e));
   }
 
 }

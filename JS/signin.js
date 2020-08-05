@@ -14,7 +14,7 @@ function signIn() {
     const pass = $("#password");
     const emailpass = $("#email, #password");
     const submit = $("#submit-account");
-    const error = $("#error");
+    const error = $("#email-error");
     const googleLogIn = $(".google-log-in");
 
     // Submit button event listener
@@ -69,36 +69,11 @@ function signIn() {
     googleLogIn.click(() => {
       firebase.auth().signInWithPopup(provider)
         .then(() => $("#close-popup").trigger('click'))
-        .catch(function (error) {
-          console.log(error.message);
-        });
+        .catch(e => console.log(e.message));
     });
 
   });
 
   logOut.click(() => firebase.auth().signOut());
-
-  firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      logIn.hide();
-      signUp.hide();
-      logOut.show();
-
-      showHide.hide();
-      dateTimeInput.removeClass("hide-icon");
-      input.removeAttr("readonly")
-      textInput.on('keydown', e => { if (e.which === 13) e.preventDefault(); });
-
-
-    } else {
-      logIn.show();
-      signUp.show();
-      logOut.hide();
-
-      showHide.show();
-      dateTimeInput.addClass("hide-icon");
-      input.attr("readonly", "true");
-    }
-  });
 
 }

@@ -1,8 +1,7 @@
-#meetups-slide input {
+input {
   outline: none;
   background: none;
   border: none;
-  color: white;
   text-align: center;
 }
 
@@ -54,6 +53,7 @@
 
 /* Card date and time */
 .card-date-time {
+  color: white;
   font-size: 1.5rem;
   font-family: monospace;
   width: 30%;
@@ -100,12 +100,12 @@
 }
 
 /* Meetup card period table */
-.schedule-periods {
-}
+/* .schedule-periods {
+} */
 
 /* Meetup card period row */
-.schedule-period {
-}
+/* .schedule-period {
+} */
 
 .period-start,
 .period-end,
@@ -129,6 +129,7 @@
 }
 
 .period-activity {
+  color: white;
   font-size: 15pt;
   text-align: left;
   padding-left: 1rem;
@@ -140,4 +141,17 @@
 
 .hide-icon::-webkit-calendar-picker-indicator {
   display: none;
+}
+
+#cards-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size: 1.5rem;
+  font-family: sans-serif;
+  font-style: oblique;
+  text-shadow: 1px 1px 0 black;
+  color: white;
 }

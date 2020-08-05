@@ -27,10 +27,9 @@
 #password,
 #username {
   font-size: 1.5rem;
-  border: none;
-  outline: none;
   border-bottom: 1px solid black;
   margin: 0.5rem 0;
+  text-align: left;
 }
 
 #submit-account {
@@ -44,7 +43,7 @@
   cursor: pointer;
 }
 
-#error {
+#email-error {
   padding: 0.5rem;
   color: rgb(255, 0, 50);
   background: rgb(255, 225, 225);
@@ -102,10 +101,10 @@
   padding: calc(25px - 15pt / 2);
 }
 .google-log-in::before {
-  background: url(../Images/googleIcon.webp) center/40px 40px no-repeat, white;
+  background: url(../Images/googleIcon.webp) center/30px 30px no-repeat, white;
   width: 50px;
   height: 50px;
-  margin: 3px;
+  margin: 2px;
   display: inline-block;
   content: "";
 }
