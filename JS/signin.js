@@ -1,18 +1,18 @@
 function signIn() {
 
-  const provider = new firebase.auth.GoogleAuthProvider();
-
   // Event handler for login button
   logIn.click(async function () {
 
     // Show popup
-    const loginTemplate = await (await fetch("../Templates/login.html")).text();
+    const loginTemplate = cardTemplate = await (await fetch(`..${
+      window.location.href == 'https://gunnpeeps.github.io/meetups/' ? '/meetups' : ''
+      }/Templates/log-in.html`)).text();
     showPopup(loginTemplate, { "button": "Log In" });
 
-    //  DOMelements 
+    //  DOMelements
+    const username = $("#username");
     const email = $("#email");
     const pass = $("#password");
-    const emailpass = $("#email, #password");
     const submit = $("#submit-account");
     const error = $("#email-error");
     const googleLogIn = $(".google-log-in");
@@ -20,18 +20,17 @@ function signIn() {
     // Submit button event listener
     submit.click(() => {
       firebase.auth().signInWithEmailAndPassword(email.val(), pass.val())
-        .then(() => closePopup.trigger('click'))
-        .catch(e => {
-          error.text(e.message).show();
-        });
+        .then(() => {
+          firebase.auth().updateUser({ displayName: username.val() });
+          closePopup.trigger('click');
+        })
+        .catch(e => error.text(e.message).show());
     });
 
     googleLogIn.click(() => {
-      firebase.auth().signInWithPopup(provider)
+      firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
         .then(() => closePopup.trigger('click'))
-        .catch(function (error) {
-          console.log(error.message);
-        });
+        .catch(error => console.log(error.message));
     });
 
   });
@@ -39,13 +38,14 @@ function signIn() {
   signUp.click(async function () {
 
     // Show popup
-    const signupTemplate = await (await fetch("../Templates/signup.html")).text();
+    cardTemplate = await (await fetch(`..${
+      window.location.href == 'https://gunnpeeps.github.io/meetups/' ? '/meetups' : ''
+      }/Templates/sign-up.html`)).text();
     showPopup(signupTemplate, { "button": "Sign Up" });
 
     // DOM elements
     const email = $("#email");
     const pass = $("#password");
-    const emailpass = $("#email, #password");
     const submit = $("#submit-account");
     const error = $("#error");
     const googleLogIn = $(".google-log-in");

@@ -53,11 +53,16 @@
   <body>
 
     <div id="nav-bar">
-      <div class="slide-ref"><a href="#meetups-slide">Meetups</a></div>
-      <div class="slide-ref"><a href="#resource-slide" style="color: var(--yellow);">Resources</a></div>
-      <div id="sign-up">Sign Up</div>
-      <div id="log-in">Log In</div>
-      <div id="log-out" style="display: none;">Log Out</div>
+      <div id="nav-start">
+        <div class="slide-ref"><a href="#meetups-slide">Meetups</a></div>
+        <div class="slide-ref"><a href="#resource-slide" style="color: var(--yellow);">Resources</a></div>
+      </div>
+      <div id="nav-end">
+        <div id="user-greeting"></div>
+        <div id="log-in">Log In</div>
+        <div id="sign-up">Sign Up</div>
+        <div id="log-out" style="display: none;">Log Out</div>
+      </div>
     </div>
 
     <div class="slide blue-back" id="title-slide">
@@ -66,7 +71,7 @@
 
     <div class="slide green-back" id="meetups-slide" style="min-height: 60vh;">
       <div class="heading">Meetups</div>
-      <div id='cards-error'></div>
+      <div id="cards-error"></div>
       <div id="card-container"></div>
     </div>
 

@@ -1,6 +1,6 @@
 var database = new Database();
 
-var logIn, signUp, logOut;
+var logIn, signUp, logOut, greeting;
 var popupContainer, popup, closePopup;
 var meetupSlide, cards, cardTemplate, meetups;
 var showHide, input, dateTimeInput, textInput;
@@ -12,6 +12,7 @@ $(async () => {
   logIn = $("#log-in");
   signUp = $("#sign-up");
   logOut = $("#log-out");
+  greeting = $("#user-greeting");
 
   popupContainer = $("#popup-container");
   popup = popupContainer.find("#popup");
@@ -21,7 +22,9 @@ $(async () => {
   meetupSlide = $("#meetups-slide");
   cardsError = meetupSlide.find("#cards-error");
   cards = meetupSlide.find("#card-container");
-  cardTemplate = await (await fetch("../Templates/meetup-card.html")).text();
+  cardTemplate = await (await fetch(`..${
+    window.location.href == 'https://gunnpeeps.github.io/meetups/' ? '/meetups' : ''
+    }/Templates/meetup-card.html`)).text();
 
   showPopup = function (template, obj) {
     popupContainer.fadeOut(() => popupTarget.html(Mustache.render(template, obj)));
@@ -37,13 +40,37 @@ $(async () => {
 
       meetups = await database.getAllMeetups();
       for (let meetup of meetups) {
-        cards.append(Mustache.render(cardTemplate, { "data": meetup.data(), "id": meetup.id }));
+        cards
+          .hide()
+          .append(Mustache.render(cardTemplate, { "data": meetup.data(), "id": meetup.id }))
+          .fadeIn();
       }
 
       showHide = $(".log-in-show-hide");
       input = cards.find("input");
       dateTimeInput = cards.find("input[type='date'],input[type='time']");
       textInput = $("input[type='text']");
+
+      logIn.hide();
+      signUp.hide();
+      logOut.show();
+      greeting.text(`Hello, ${user.displayName}!`).show();
+
+      $(".card-title").change(function () {
+        database.updateMeetup(
+          $(this).parents(".meetup-card")[0].id,
+          { title: $(this).val() }
+        );
+      });
+
+      $(".card-date").change(function () {
+        database.updateMeetup(
+          $(this).parents(".meetup-card").first().id,
+          {
+            title: $(this).val()
+          }
+        );
+      });
 
       const editors = await database.getEditors();
       if (editors.includes(user.email.replace(/\./g, ''))) {
@@ -54,12 +81,6 @@ $(async () => {
         input.removeAttr("readonly");
         textInput.on('keydown', e => { if (e.which === 13) e.preventDefault(); });
 
-        logIn.hide();
-        signUp.hide();
-        logOut.show();
-
-
-
       } else {
 
         cardsError.hide();
@@ -67,21 +88,19 @@ $(async () => {
         dateTimeInput.addClass("hide-icon");
         input.attr("readonly", "true");
 
-        logIn.hide();
-        signUp.hide();
-        logOut.show();
-
       }
     } else {
 
-      cards.empty();
+      cards.fadeOut(function () {
+        $(this).empty().show();
+      });
 
-      cardsError.show();
-      cardsError.text("Log in to see meetups");
+      cardsError.text("Log in to see meetups").fadeIn();
 
       logIn.show();
       signUp.show();
       logOut.hide();
+      greeting.hide();
 
     }
 

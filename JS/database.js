@@ -33,10 +33,8 @@ class Database {
     this.meetups.doc(id).delete();
   }
 
-  updateMeetup(id,) {
-    this.meetups.doc(id).update({
-
-    });
+  updateMeetup(id, update) {
+    this.meetups.doc(id).update(update);
   }
 
   getEditors() {
