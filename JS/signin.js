@@ -6,7 +6,7 @@ function signIn() {
   logIn.click(async function () {
 
     // Show popup
-    const loginTemplate = await (await fetch("../Templates/login.html")).text();
+    const loginTemplate = await (await fetch("../meetups/Templates/login.html")).text();
     showPopup(loginTemplate, { "button": "Log In" });
 
     //  DOMelements 
@@ -39,7 +39,7 @@ function signIn() {
   signUp.click(async function () {
 
     // Show popup
-    const signupTemplate = await (await fetch("../Templates/signup.html")).text();
+    const signupTemplate = await (await fetch("../meetups/Templates/signup.html")).text();
     showPopup(signupTemplate, { "button": "Sign Up" });
 
     // DOM elements
