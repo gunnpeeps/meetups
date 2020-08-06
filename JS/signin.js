@@ -6,7 +6,7 @@ function signIn() {
     // Show popup with log in template
     showPopup(
       await (await fetch(`..${
-        window.location.href == 'https://gunnpeeps.github.io/meetups/JS/signin.js' ? '/meetups' : ''
+        window.location.href == 'https://gunnpeeps.github.io/meetups/' ? '/meetups' : ''
         }/Templates/login.html`)).text(),
       { "button": "Log In" }
     );
@@ -70,7 +70,7 @@ function signIn() {
     });
 
     googleLogIn.click(() => {
-      firebase.auth().signInWithPopup(provider)
+      firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
         .then(() => $("#close-popup").trigger('click'))
         .catch(e => console.log(e.message));
     });
