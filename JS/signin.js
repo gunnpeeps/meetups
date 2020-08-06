@@ -5,7 +5,7 @@ function signIn() {
 
     // Show popup
     const loginTemplate = cardTemplate = await (await fetch(`..${
-      window.location.href == 'https://gunnpeeps.github.io/meetups/' ? '/meetups' : ''
+      window.location.href == 'https://gunnpeeps.github.io/meetups/JS/signin.js' ? '/meetups' : ''
       }/Templates/log-in.html`)).text();
     showPopup(loginTemplate, { "button": "Log In" });
 

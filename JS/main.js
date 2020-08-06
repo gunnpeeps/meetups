@@ -22,6 +22,7 @@ $(async () => {
   meetupSlide = $("#meetups-slide");
   cardsError = meetupSlide.find("#cards-error");
   cards = meetupSlide.find("#card-container");
+  console.log(window.location.href);
   cardTemplate = await (await fetch(`..${
     window.location.href == 'https://gunnpeeps.github.io/meetups/' ? '/meetups' : ''
     }/Templates/meetup-card.html`)).text();
