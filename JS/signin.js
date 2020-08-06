@@ -3,14 +3,15 @@ function signIn() {
   // Event handler for login button
   logIn.click(async function () {
 
-    // Show popup
-    const loginTemplate = await (await fetch(`..${
-      window.location.href == 'https://gunnpeeps.github.io/meetups/JS/signin.js' ? '/meetups' : ''
-      }/Templates/login.html`)).text();
-    showPopup(loginTemplate, { "button": "Log In" });
+    // Show popup with log in template
+    showPopup(
+      await (await fetch(`..${
+        window.location.href == 'https://gunnpeeps.github.io/meetups/JS/signin.js' ? '/meetups' : ''
+        }/Templates/login.html`)).text(),
+      { "button": "Log In" }
+    );
 
     //  DOMelements
-    const username = $("#username");
     const email = $("#email");
     const pass = $("#password");
     const submit = $("#submit-account");
@@ -21,7 +22,6 @@ function signIn() {
     submit.click(() => {
       firebase.auth().signInWithEmailAndPassword(email.val(), pass.val())
         .then(() => {
-          firebase.auth().updateUser({ displayName: username.val() });
           closePopup.trigger('click');
         })
         .catch(e => error.text(e.message).show());
@@ -37,13 +37,16 @@ function signIn() {
 
   signUp.click(async function () {
 
-    // Show popup
-    const signupTemplate = await (await fetch(`..${
-      window.location.href == 'https://gunnpeeps.github.io/meetups/' ? '/meetups' : ''
-      }/Templates/signup.html`)).text();
-    showPopup(signupTemplate, { "button": "Sign Up" });
+    // Show Popup with sign in template
+    showPopup(
+      await (await fetch(`..${
+        window.location.href == 'https://gunnpeeps.github.io/meetups/' ? '/meetups' : ''
+        }/Templates/signup.html`)).text(),
+      { "button": "Sign Up" }
+    );
 
     // DOM elements
+    const username = $("#username");
     const email = $("#email");
     const pass = $("#password");
     const submit = $("#submit-account");
@@ -54,10 +57,10 @@ function signIn() {
     submit.click(async () => {
       await firebase.auth().createUserWithEmailAndPassword(email.val(), pass.val())
         .then(() => {
-          var emailval = email.val();
+          firebase.auth().updateUser({ displayName: username.val() });
           showPopup(
             `<div id='verification'>A verification email has been sent to</div><div>{{email}}</div>`,
-            { "email": emailval }
+            { "email": email.val() }
           );
           firebase.auth().currentUser.sendEmailVerification();
         })

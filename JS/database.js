@@ -18,14 +18,18 @@ class Database {
 
   getAllMeetups() {
     return this.meetups.get()
-      .then(meetups => meetups.docs)
+      .then(meetups => meetups.docs.map(m => {
+        var newm = m.data();
+        newm.id = m.id;
+        return newm
+      }))
       .catch(e => console.log(e.message));
   }
 
-  createMeetup(title, time) {
+  createMeetup(title, date) {
     this.meetups.add({
       "title": title,
-      "time": time,
+      "date": date,
       "periods": []
     });
   }
@@ -33,8 +37,8 @@ class Database {
     this.meetups.doc(id).delete();
   }
 
-  updateMeetup(id, update) {
-    this.meetups.doc(id).update(update);
+  updateMeetup(id, key, value) {
+    this.meetups.doc(id).update({ [key]: value });
   }
 
   getEditors() {
