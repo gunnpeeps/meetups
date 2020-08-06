@@ -4,7 +4,7 @@ function signIn() {
   logIn.click(async function () {
 
     // Show popup
-    const loginTemplate = cardTemplate = await (await fetch(`..${
+    const loginTemplate = await (await fetch(`..${
       window.location.href == 'https://gunnpeeps.github.io/meetups/JS/signin.js' ? '/meetups' : ''
       }/Templates/login.html`)).text();
     showPopup(loginTemplate, { "button": "Log In" });
@@ -38,7 +38,7 @@ function signIn() {
   signUp.click(async function () {
 
     // Show popup
-    cardTemplate = await (await fetch(`..${
+    const signupTemplate = await (await fetch(`..${
       window.location.href == 'https://gunnpeeps.github.io/meetups/' ? '/meetups' : ''
       }/Templates/signup.html`)).text();
     showPopup(signupTemplate, { "button": "Sign Up" });

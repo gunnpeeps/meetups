@@ -22,13 +22,10 @@ $(async () => {
   meetupSlide = $("#meetups-slide");
   cardsError = meetupSlide.find("#cards-error");
   cards = meetupSlide.find("#card-container");
-  console.log(window.location.href);
-  console.log(await (await fetch(`../meetups/Templates/meetup-card.html`)).text());
-  console.log(await (await fetch(`../../meetups/Templates/meetup-card.html`)).text());
-  console.log(await (await fetch(`../Templates/meetup-card.html`)).text());
-  console.log(await (await fetch(`..${
+
+  cardTemplate = await (await fetch(`..${
     window.location.href == 'https://gunnpeeps.github.io/meetups/' ? '/meetups' : ''
-    }/Templates/meetup-card.html`)).text());
+    }/Templates/meetup-card.html`)).text();
 
   showPopup = function (template, obj) {
     popupContainer.fadeOut(() => popupTarget.html(Mustache.render(template, obj)));
