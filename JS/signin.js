@@ -5,9 +5,7 @@ function signIn() {
 
     // Show popup with log in template
     showPopup(
-      await (await fetch(`..${
-        window.location.href == 'https://gunnpeeps.github.io/meetups/' ? '/meetups' : ''
-        }/Templates/login.html`)).text(),
+      await (await fetch(`./Templates/login.html`)).text(),
       { "button": "Log In" }
     );
 
@@ -39,9 +37,7 @@ function signIn() {
 
     // Show Popup with sign in template
     showPopup(
-      await (await fetch(`..${
-        window.location.href == 'https://gunnpeeps.github.io/meetups/' ? '/meetups' : ''
-        }/Templates/signup.html`)).text(),
+      await (await fetch(`./Templates/signup.html`)).text(),
       { "button": "Sign Up" }
     );
 

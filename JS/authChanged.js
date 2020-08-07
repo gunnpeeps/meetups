@@ -1,21 +1,7 @@
 async function authChanged(user) {
   if (user && user.emailVerified) {
 
-    const cardTemplate = await (await fetch(`..${
-      window.location.href == 'https://gunnpeeps.github.io/meetups/' ? '/meetups' : ''
-      }/Templates/meetup-card.html`)).text();
-    meetups = await database.getAllMeetups();
-    for (let meetup of meetups) {
-      cards
-        .hide()
-        .append(Handlebars.compile(cardTemplate)(meetup))
-        .fadeIn();
-    }
-
-    showHide = $(".log-in-show-hide");
-    input = cards.find("input");
-    dateTimeInput = cards.find("input[type='date'],input[type='time']");
-    textInput = $("input[type='text']");
+    await loadMeetups();
 
     logIn.hide();
     signUp.hide();
@@ -25,24 +11,37 @@ async function authChanged(user) {
     const editors = await database.getEditors();
     if (editors.includes(user.email.replace(/\./g, ''))) {
 
-      cardsError.hide();
       showHide.show();
       dateTimeInput.removeClass("hide-icon");
       input.removeAttr("readonly");
       textInput.on('keydown', e => { if (e.which === 13) e.preventDefault(); });
 
-      $(".card-date, .card-title, .schedule-period>td>input").change(function () {
-        const input = $(this);
-        database.updateMeetup(
-          input.parents(".meetup-card")[0].id,
-          input.attr('class').split(' ')[1],
-          input.val()
-        );
+      $("#add-meetup").click(async () => {
+        await database.createMeetup();
+        await loadMeetups();
+      });
+      $(".add-period").click(async function () {
+        const obj = await database.createPeriod($(this).parents(".meetup-card")[0].id);
+        $(this).siblings(".schedule-periods").append(Handlebars.compile(`
+          <tr class="schedule-period">
+            <td><input class="period-start periods.{{num}}.start" type="time" value={{start}}></td>
+            <td class="dash">-</td>
+            <td><input class="period-end periods.{{num}}.end" type="time" value={{end}}></td>
+            <td><input class="period-activity periods.{{num}}.activity" type="text" value={{activity}}></td>
+          </tr>
+        `)(obj));
+        console.log(Handlebars.compile(`
+          <tr class="schedule-period">
+            <td><input class="period-start periods.{{num}}.start" type="time" value={{start}}></td>
+            <td class="dash">-</td>
+            <td><input class="period-end periods.{{num}}.end" type="time" value={{end}}></td>
+            <td><input class="period-activity periods.{{num}}.activity" type="text" value={{activity}}></td>
+          </tr>
+        `)(obj));
       });
 
     } else {
 
-      cardsError.hide();
       showHide.hide();
       dateTimeInput.addClass("hide-icon");
       input.attr("readonly", "true");
@@ -54,7 +53,7 @@ async function authChanged(user) {
       $(this).empty().show();
     });
 
-    cardsError.text("Log in to see meetups").fadeIn();
+    cardsError.fadeOut(() => cardsError.text("Log in to see meetups")).fadeIn();
 
     logIn.show();
     signUp.show();

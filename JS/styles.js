@@ -2,10 +2,10 @@ $(() => {
 
   var shadow = '';
   for (let i = 1; i <= 5; i++) {
-    shadow += `${shadow ? ',' : ''} ${i}px ${i}px 0 darkgreen`;
+    shadow += `${shadow ? ',' : ''} ${i}px ${i}px 0 black`;
   }
   $("#js-styles").append(`
-    #log-in, #sign-up, #log-out {
+    .long-shadow {
       box-shadow:${shadow};
     }
   `);

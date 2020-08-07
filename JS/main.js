@@ -1,11 +1,16 @@
+var locals = [
+  "http://127.0.0.1:5500",
+  "http://localhost"
+];
+
 var database = new Database();
 
 var logIn, signUp, logOut, greeting;
 var popupContainer, popup, closePopup;
-var meetupSlide, cards, meetups;
+var meetupSlide, cards;
 var showHide, input, dateTimeInput, textInput;
 
-var showPopup;
+var showPopup, loadMeetups;
 
 $(async () => {
 
@@ -29,8 +34,45 @@ $(async () => {
     closePopup.click(() => popupContainer.fadeOut());
   };
 
-  signIn();
+  loadMeetups = async function () {
 
+    showHide = $(".log-in-show-hide");
+    input = cards.find("input");
+    dateTimeInput = cards.find("input[type='date'],input[type='time']");
+    textInput = $("input[type='text']");
+
+    let resolvePromise;
+    let loadPromise = new Promise((res, reject) => {
+      resolvePromise = res;
+    });
+
+    const meetups = await database.getAllMeetups()
+    const cardTemplate = Handlebars.compile(
+      await (await fetch(`./Templates/meetup-card.html`)).text()
+    );
+    cards.fadeOut(() => {
+      cards.empty();
+      for (let meetup of meetups) {
+        cards.append(cardTemplate(meetup));
+      }
+    }).fadeIn(() => {
+      resolvePromise();
+    });
+
+    await loadPromise;
+
+    $(".card-date, .card-title, .schedule-period>td>input").change(function () {
+      const input = $(this);
+      database.updateMeetup(
+        input.parents(".meetup-card")[0].id,
+        input.attr('class').split(' ')[1],
+        input.val()
+      );
+    });
+
+  }
+
+  signIn();
   firebase.auth().onAuthStateChanged(user => authChanged(user));
 
 });
