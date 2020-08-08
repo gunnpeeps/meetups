@@ -1,7 +1,7 @@
-<div id={{id}} class="meetup-card">
+<div id="{{id}}" class="meetup-card">
   <div class="title-time-container">
-    <input type="text" class="card-title title" value={{title}}></input>
-    <input type="date" class="card-date date" value={{date}}></input>
+    <input type="text" class="card-title title" value="{{title}}"></input>
+    <input type="date" class="card-date date" value="{{date}}"></input>
   </div>
 
   <div class="card-info-container">
@@ -12,10 +12,10 @@
 
         {{#each periods}}
         <tr class="schedule-period">
-          <td><input class="period-start periods.{{@key}}.start" type="time" value={{this.start}}></td>
+          <td><input class="period-start" id="{{id}}" type="time" value="{{this.start}}"></td>
           <td class="dash">-</td>
-          <td><input class="period-end periods.{{@key}}.end" type="time" value={{this.end}}></td>
-          <td><input class="period-activity periods.{{@key}}.activity" type="text" value={{this.activity}}></td>
+          <td><input class="period-end" id="{{id}}" type="time" value="{{this.end}}"></td>
+          <td><input class="period-activity" id="{{id}}" type="text" value="{{this.activity}}"></td>
         </tr>
         {{/each}}
 

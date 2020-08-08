@@ -1,8 +1,29 @@
 async function authChanged(user) {
+
   if (user && user.emailVerified) {
 
     await loadMeetups();
 
+    $(document).on('change', ".card-date, .card-title", function () {
+      const input = $(this);
+      database.updateMeetup(
+        input.parents(".meetup-card")[0].id,
+        input.attr('class').split(' ')[1],
+        input.val()
+      );
+    });
+    $(document).on('change', ".schedule-period>td>input", function () {
+      console.log('hi');
+      const input = $(this);
+      database.updatePeriod(
+        input.parents(".meetup-card")[0].id,
+        this.id,
+        input.attr('class').split('-')[1],
+        input.val()
+      );
+    });
+
+    cardsError.fadeOut();
     logIn.hide();
     signUp.hide();
     logOut.show();
@@ -16,26 +37,18 @@ async function authChanged(user) {
       input.removeAttr("readonly");
       textInput.on('keydown', e => { if (e.which === 13) e.preventDefault(); });
 
-      $("#add-meetup").click(async () => {
+      $("#add-meetup").on('click', async () => {
         await database.createMeetup();
         await loadMeetups();
       });
-      $(".add-period").click(async function () {
+      $(".add-period").on('click', async function () {
         const obj = await database.createPeriod($(this).parents(".meetup-card")[0].id);
         $(this).siblings(".schedule-periods").append(Handlebars.compile(`
           <tr class="schedule-period">
-            <td><input class="period-start periods.{{num}}.start" type="time" value={{start}}></td>
+            <td><input class="period-start" id="{{id}}" type="time" value="{{this.start}}"></td>
             <td class="dash">-</td>
-            <td><input class="period-end periods.{{num}}.end" type="time" value={{end}}></td>
-            <td><input class="period-activity periods.{{num}}.activity" type="text" value={{activity}}></td>
-          </tr>
-        `)(obj));
-        console.log(Handlebars.compile(`
-          <tr class="schedule-period">
-            <td><input class="period-start periods.{{num}}.start" type="time" value={{start}}></td>
-            <td class="dash">-</td>
-            <td><input class="period-end periods.{{num}}.end" type="time" value={{end}}></td>
-            <td><input class="period-activity periods.{{num}}.activity" type="text" value={{activity}}></td>
+            <td><input class="period-end" id="{{id}}" type="time" value="{{this.end}}"></td>
+            <td><input class="period-activity" id="{{id}}" type="text" value="{{this.activity}}"></td>
           </tr>
         `)(obj));
       });
@@ -53,7 +66,9 @@ async function authChanged(user) {
       $(this).empty().show();
     });
 
-    cardsError.fadeOut(() => cardsError.text("Log in to see meetups")).fadeIn();
+    cardsError.fadeOut(() => cardsError.text(
+      user.emailVerified ? "Log in to see meetups" : "Verify your email to see meetups"
+    )).fadeIn();
 
     logIn.show();
     signUp.show();

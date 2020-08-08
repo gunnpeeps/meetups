@@ -31,7 +31,7 @@ $(async () => {
   showPopup = function (template, obj) {
     popupContainer.fadeOut(() => popupTarget.html(Handlebars.compile(template)(obj)));
     popupContainer.fadeIn();
-    closePopup.click(() => popupContainer.fadeOut());
+    closePopup.on('click', () => popupContainer.fadeOut());
   };
 
   loadMeetups = async function () {
@@ -42,11 +42,11 @@ $(async () => {
     textInput = $("input[type='text']");
 
     let resolvePromise;
-    let loadPromise = new Promise((res, reject) => {
+    let loadPromise = new Promise((res, rej) => {
       resolvePromise = res;
     });
 
-    const meetups = await database.getAllMeetups()
+    const meetups = await database.getAllMeetups();
     const cardTemplate = Handlebars.compile(
       await (await fetch(`./Templates/meetup-card.html`)).text()
     );
@@ -60,15 +60,6 @@ $(async () => {
     });
 
     await loadPromise;
-
-    $(".card-date, .card-title, .schedule-period>td>input").change(function () {
-      const input = $(this);
-      database.updateMeetup(
-        input.parents(".meetup-card")[0].id,
-        input.attr('class').split(' ')[1],
-        input.val()
-      );
-    });
 
   }
 

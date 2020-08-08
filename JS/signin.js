@@ -1,7 +1,7 @@
 function signIn() {
 
   // Event handler for login button
-  logIn.click(async function () {
+  logIn.on('click', async function () {
 
     // Show popup with log in template
     showPopup(
@@ -17,7 +17,7 @@ function signIn() {
     const googleLogIn = $(".google-log-in");
 
     // Submit button event listener
-    submit.click(() => {
+    submit.on('click', () => {
       firebase.auth().signInWithEmailAndPassword(email.val(), pass.val())
         .then(() => {
           closePopup.trigger('click');
@@ -25,15 +25,15 @@ function signIn() {
         .catch(e => error.text(e.message).show());
     });
 
-    googleLogIn.click(() => {
+    googleLogIn.on('click', () => {
       firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
         .then(() => closePopup.trigger('click'))
-        .catch(error => console.log(error.message));
+        .catch(e => console.error("Error logging in with Google: ", e));
     });
 
   });
 
-  signUp.click(async function () {
+  signUp.on('click', async function () {
 
     // Show Popup with sign in template
     showPopup(
@@ -50,7 +50,7 @@ function signIn() {
     const googleLogIn = $(".google-log-in");
 
     // Submit button event listener
-    submit.click(async () => {
+    submit.on('click', async () => {
       await firebase.auth().createUserWithEmailAndPassword(email.val(), pass.val())
         .then(() => {
           firebase.auth().updateUser({ displayName: username.val() });
@@ -65,14 +65,14 @@ function signIn() {
         });
     });
 
-    googleLogIn.click(() => {
+    googleLogIn.on('click', () => {
       firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
         .then(() => $("#close-popup").trigger('click'))
-        .catch(e => console.log(e.message));
+        .catch(e => console.error("Error logging in with Google: ", e));
     });
 
   });
 
-  logOut.click(() => firebase.auth().signOut());
+  logOut.on('click', () => firebase.auth().signOut());
 
 }
