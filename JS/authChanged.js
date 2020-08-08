@@ -13,7 +13,6 @@ async function authChanged(user) {
       );
     });
     $(document).on('change', ".schedule-period>td>input", function () {
-      console.log('hi');
       const input = $(this);
       database.updatePeriod(
         input.parents(".meetup-card")[0].id,
@@ -43,14 +42,18 @@ async function authChanged(user) {
       });
       $(".add-period").on('click', async function () {
         const obj = await database.createPeriod($(this).parents(".meetup-card")[0].id);
-        $(this).siblings(".schedule-periods").append(Handlebars.compile(`
-          <tr class="schedule-period">
-            <td><input class="period-start" id="{{id}}" type="time" value="{{this.start}}"></td>
-            <td class="dash">-</td>
-            <td><input class="period-end" id="{{id}}" type="time" value="{{this.end}}"></td>
-            <td><input class="period-activity" id="{{id}}" type="text" value="{{this.activity}}"></td>
-          </tr>
-        `)(obj));
+        $(this).siblings(".schedule-periods").append(
+          $(
+            Handlebars.compile(`
+              <tr class="schedule-period">
+                <td><input class="period-start" id="{{id}}" type="time" value="{{this.start}}"></td>
+                <td class="dash">-</td>
+                <td><input class="period-end" id="{{id}}" type="time" value="{{this.end}}"></td>
+                <td><input class="period-activity" id="{{id}}" type="text" value="{{this.activity}}"></td>
+              </tr>
+            `)(obj)
+          ).hide().fadeIn()
+        );
       });
 
     } else {
